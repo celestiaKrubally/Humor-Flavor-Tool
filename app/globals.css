@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg: #f5f4f0;
+  --bg2: #ffffff;
+  --bg3: #eeede8;
+  --border: #e0dfd8;
+  --border2: #ccccc0;
+  --text: #1a1a18;
+  --text2: #5a5a52;
+  --text3: #9a9a90;
+  --accent: #2d6a4f;
+  --accent2: #40916c;
+  --red: #c1121f;
+  --yellow: #e9c46a;
+  --blue: #264653;
+}
+
+[data-theme="dark"] {
+  --bg: #0f0f0e;
+  --bg2: #1a1a18;
+  --bg3: #222220;
+  --border: #2a2a28;
+  --border2: #3a3a38;
+  --text: #f0f0e8;
+  --text2: #a0a098;
+  --text3: #606058;
+  --accent: #52b788;
+  --accent2: #74c69d;
+  --red: #e63946;
+  --yellow: #e9c46a;
+  --blue: #457b9d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f0f0e;
+    --bg2: #1a1a18;
+    --bg3: #222220;
+    --border: #2a2a28;
+    --border2: #3a3a38;
+    --text: #f0f0e8;
+    --text2: #a0a098;
+    --text3: #606058;
+    --accent: #52b788;
+    --accent2: #74c69d;
+    --red: #e63946;
+    --yellow: #e9c46a;
+    --blue: #457b9d;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+.mono { font-family: 'DM Mono', monospace; }
+
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 7px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover { background: var(--accent2); }
+.btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--border2); color: var(--text); }
+.btn-danger { background: transparent; color: var(--red); border: 1px solid #c1121f44; }
+.btn-danger:hover { background: #c1121f18; }
+.btn-sm { padding: 0.3rem 0.7rem; font-size: 0.8rem; }
+
+.input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0.6rem 0.9rem;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input:focus { border-color: var(--accent); }
+.input::placeholder { color: var(--text3); }
+textarea.input { resize: vertical; min-height: 80px; }
+
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.modal {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%; max-width: 560px;
+  max-height: 90vh; overflow-y: auto;
+}
+
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem; font-weight: 700;
+  font-family: 'DM Mono', monospace;
+}
+.badge-green { background: #52b78822; color: var(--accent); }
+.badge-red { background: #c1121f22; color: var(--red); }
+.badge-blue { background: #45789d22; color: var(--blue); }
+
+.page-header {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.page-title { font-size: 1.4rem; font-weight: 800; }
+.page-subtitle { font-size: 0.8rem; color: var(--text3); margin-top: 0.2rem; font-family: 'DM Mono', monospace; }
+
+.step-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.step-number {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700;
+  flex-shrink: 0;
+}
+
+.empty-state { text-align: center; padding: 3rem; color: var(--text3); }
