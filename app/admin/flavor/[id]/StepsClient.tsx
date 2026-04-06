@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
+
 
 type Step = {
   id: string;
@@ -21,8 +21,7 @@ export default function StepsClient({ flavorId, initialSteps }: { flavorId: stri
   const [form, setForm] = useState(emptyForm);
   const [loading, setLoading] = useState(false);
   const supabase = createClient();
-  const router = useRouter();
-
+ 
   const openCreate = () => { setEditing(null); setForm(emptyForm); setShowModal(true); };
   const openEdit = (s: Step) => { setEditing(s); setForm({ description: s.description ?? "", system_prompt: s.system_prompt ?? "", user_prompt: s.user_prompt ?? "" }); setShowModal(true); };
 
