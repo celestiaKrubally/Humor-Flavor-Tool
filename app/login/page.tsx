@@ -1,5 +1,5 @@
 "use client";
-import { createClient } from "@/utils/supabase/client";
+import { createDbClient } from "@/utils/supabase/client";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -8,7 +8,7 @@ function LoginContent() {
   const error = searchParams.get("error");
 
   const handleLogin = async () => {
-    const supabase = createClient();
+    const supabase = createDbClient();
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: `${window.location.origin}/auth/callback` },
