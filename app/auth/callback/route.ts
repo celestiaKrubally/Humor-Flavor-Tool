@@ -23,8 +23,8 @@ export async function GET(request: Request) {
         },
       }
     );
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) return NextResponse.redirect(`${origin}/admin`);
+const { error } = await supabase.auth.exchangeCodeForSession(code);
+if (!error) return NextResponse.redirect(`https://humorflavortool.vercel.app/admin`);
   }
-  return NextResponse.redirect(`${origin}/login?error=auth`);
+return NextResponse.redirect(`https://humorflavortool.vercel.app/login?error=auth`);
 }
