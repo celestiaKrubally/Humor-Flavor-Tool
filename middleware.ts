@@ -54,3 +54,13 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
 };
+
+const { data: profile, error: profileError } = await supabase
+  .from("profiles")
+  .select("is_superadmin, is_matrix_admin")
+  .eq("id", user.id)
+  .single();
+
+console.log("user id:", user.id);
+console.log("profile:", profile);
+console.log("profile error:", profileError);
