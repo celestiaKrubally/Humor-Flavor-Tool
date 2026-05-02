@@ -24,7 +24,7 @@ export async function GET(request: Request) {
       }
     );
 const { error } = await supabase.auth.exchangeCodeForSession(code);
-if (!error) return NextResponse.redirect(`https://humorflavortool.vercel.app/admin`);
+  if (!error) return NextResponse.redirect(`${origin}/admin`);
   }
-return NextResponse.redirect(`https://humorflavortool.vercel.app/login?error=auth`);
+  return NextResponse.redirect(`${origin}/login?error=auth`);
 }
