@@ -1,5 +1,5 @@
 "use client";
-import { createDbClient } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/client";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -7,14 +7,13 @@ function LoginContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
 
-  const handleLogin = async () => {
-    const supabase = createDbClient();
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: `${window.location.origin}/auth/callback` },
-    });
-  };
-
+ const handleLogin = async () => {
+  const supabase = createClient(); // personal project client
+  await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: "https://humorflavortool.vercel.app/auth/callback" },
+  });
+};
   return (
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--bg)", padding: "1rem" }}>
       <div style={{ width: "100%", maxWidth: "380px" }}>
