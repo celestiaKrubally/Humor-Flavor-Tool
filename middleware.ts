@@ -39,6 +39,7 @@ export async function middleware(request: NextRequest) {
   );
 
   const { data: { user } } = await classSupabase.auth.getUser();
+  console.log("user email from class DB:", user?.email);
   const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
   const isLoginPage = request.nextUrl.pathname === "/login";
   const isAuthCallback = request.nextUrl.pathname.startsWith("/auth");
