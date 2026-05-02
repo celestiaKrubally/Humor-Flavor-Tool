@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
-  
+
   // Class DB for auth session
   const classSupabase = createServerClient(
     process.env.NEXT_PUBLIC_CLASS_DB_URL!,
@@ -53,7 +53,7 @@ export async function middleware(request: NextRequest) {
     const { data: profile } = await personalSupabase
       .from("profiles")
       .select("is_superadmin, is_matrix_admin")
-      .eq("id", user.id)
+      .eq("email", user.email)
       .single();
 
     if (!profile?.is_superadmin && !profile?.is_matrix_admin) {
