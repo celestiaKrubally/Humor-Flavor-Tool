@@ -30,13 +30,11 @@ export default function TestClient({ flavorId, flavorName }: { flavorId: string;
     setCaptions([]);
 
     try {
-      // Get auth token
       const { data: { session } } = await supabase.auth.getSession();
       const token = session?.access_token;
       if (!token) throw new Error("Not authenticated");
 
       setStatus("Getting upload URL...");
-      // Step 1: Get presigned URL
       const presignedRes = await fetch("https://api.almostcrackd.ai/pipeline/generate-presigned-url", {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" },
@@ -46,7 +44,6 @@ export default function TestClient({ flavorId, flavorName }: { flavorId: string;
       const { presignedUrl, cdnUrl } = await presignedRes.json();
 
       setStatus("Uploading image...");
-      // Step 2: Upload to presigned URL
       await fetch(presignedUrl, {
         method: "PUT",
         headers: { "Content-Type": file.type },
@@ -54,7 +51,6 @@ export default function TestClient({ flavorId, flavorName }: { flavorId: string;
       });
 
       setStatus("Registering image...");
-      // Step 3: Register image
       const registerRes = await fetch("https://api.almostcrackd.ai/pipeline/upload-image-from-url", {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" },
@@ -64,7 +60,6 @@ export default function TestClient({ flavorId, flavorName }: { flavorId: string;
       const { imageId } = await registerRes.json();
 
       setStatus("Generating captions...");
-      // Step 4: Generate captions with this flavor
       const captionRes = await fetch("https://api.almostcrackd.ai/pipeline/generate-captions", {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" },
@@ -100,7 +95,10 @@ export default function TestClient({ flavorId, flavorName }: { flavorId: string;
         </div>
 
         {preview && (
-          <img src={preview} alt="preview" style={{ width: "100%", maxHeight: 200, objectFit: "cover", borderRadius: 8, marginBottom: "1rem", border: "1px solid var(--border)" }} />
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={preview} alt="preview" style={{ width: "100%", maxHeight: 200, objectFit: "cover", borderRadius: 8, marginBottom: "1rem", border: "1px solid var(--border)" }} />
+          </>
         )}
 
         {error && (
